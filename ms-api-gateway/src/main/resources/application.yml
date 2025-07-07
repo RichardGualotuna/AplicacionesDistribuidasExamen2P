@@ -1,0 +1,48 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: MS-API-GATEWAY
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true
+              lower-case-route-id: true
+          routes:
+            - id: publicaciones-autor
+              uri: lb://CareNotifier
+              predicates:
+                - Path=/api/v1/autores/**
+              filters:
+                - StripPrefix=2
+            - id: publicaciones-libro
+              uri: lb://SERVICIO-PUBLICACIONES
+              predicates:
+                - Path=/api/v1/libro/**
+              filters:
+                - StripPrefix=2
+            - id: notificaciones
+              uri: lb://SERVICIO-NOTIFICACIONES
+              predicates:
+                - Path=/api/v1/notificaciones/**
+              filters:
+                - StripPrefix=2
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    prefer-ip-address: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway
