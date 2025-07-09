@@ -22,7 +22,7 @@ spring:
             - id: health-analyzer
               uri: lb://HealthAnalyzer
               predicates:
-                - Path=/api/conjunta/2p/alerts/**
+                - Path=/conjunta/2p/health-analyzer/**
               filters:
                 - StripPrefix=2
             - id: care-notifier

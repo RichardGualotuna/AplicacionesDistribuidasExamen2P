@@ -10,8 +10,11 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-
-@Table(name = "medical_alerts")
+@Table(name = "medical_alerts", indexes = {
+        @Index(name = "idx_device_id", columnList = "device_id"),
+        @Index(name = "idx_type", columnList = "type"),
+        @Index(name = "idx_timestamp", columnList = "timestamp")
+})
 public class MedicalAlert {
 
     @Id
@@ -33,4 +36,13 @@ public class MedicalAlert {
     @Column(nullable = false)
     private ZonedDateTime timestamp;
 
+    @Column(name = "created_at", nullable = false)
+    private ZonedDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        if (createdAt == null) {
+            createdAt = ZonedDateTime.now();
+        }
+    }
 }

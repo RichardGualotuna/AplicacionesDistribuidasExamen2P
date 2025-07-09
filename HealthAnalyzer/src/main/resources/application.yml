@@ -2,9 +2,9 @@ spring:
   application:
     name: HealthAnalyzer
   datasource:
-    url: jdbc:postgresql://localhost:26257/healthanalyzer_db?user=root&password=
-    username: root
-    password:
+    url: jdbc:postgresql://localhost:5432/healthanalyzer_db
+    username: postgres
+    password: richard
   jpa:
     hibernate:
       ddl-auto: update
@@ -38,3 +38,7 @@ management:
     web:
       exposure:
         include: health,info,gateway
+
+logging:
+  level:
+    espe.edu.ec.healthanalyzer: DEBUG
