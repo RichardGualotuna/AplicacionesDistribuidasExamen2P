@@ -13,22 +13,22 @@ spring:
               enabled: true
               lower-case-route-id: true
           routes:
-            - id: publicaciones-autor
+            - id: patient-data-collector
+              uri: lb://PatientDataCollector
+              predicates:
+                - Path=/conjunta/2p/vital-signs/**
+              filters:
+                - StripPrefix=2
+            - id: health-analyzer
+              uri: lb://HealthAnalyzer
+              predicates:
+                - Path=/api/conjunta/2p/alerts/**
+              filters:
+                - StripPrefix=2
+            - id: care-notifier
               uri: lb://CareNotifier
               predicates:
-                - Path=/api/v1/autores/**
-              filters:
-                - StripPrefix=2
-            - id: publicaciones-libro
-              uri: lb://SERVICIO-PUBLICACIONES
-              predicates:
-                - Path=/api/v1/libro/**
-              filters:
-                - StripPrefix=2
-            - id: notificaciones
-              uri: lb://SERVICIO-NOTIFICACIONES
-              predicates:
-                - Path=/api/v1/notificaciones/**
+                - Path=/api/conjunta/2p/notification/**
               filters:
                 - StripPrefix=2
 

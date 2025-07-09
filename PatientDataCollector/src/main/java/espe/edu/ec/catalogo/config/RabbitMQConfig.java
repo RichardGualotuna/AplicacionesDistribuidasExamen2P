@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMQConfig {
 
     @Bean
-    public Queue notificacionesQueue() {
-        return QueueBuilder.durable("catalog.cola").build();
+    public Queue newVitalSignEventQueue() {
+        return QueueBuilder.durable("NewVitalSignEvent").build();
     }
 }

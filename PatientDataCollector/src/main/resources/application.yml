@@ -20,7 +20,7 @@ spring:
     username: admin
     password: admin
 server:
-  port: 8081
+  port: 8100
 
 eureka:
   client:
