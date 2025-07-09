@@ -1,7 +1,6 @@
 package espe.edu.ec.catalogo.listener;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import espe.edu.ec.catalogo.dto.CatalogDto;
 import espe.edu.ec.catalogo.service.NotificacionProducer;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
